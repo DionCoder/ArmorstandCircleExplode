@@ -1,0 +1,9 @@
+name: ArmorstandCircleExplode
+main: dev.dionnek.amsce.Main
+version: 1.0.0
+author: DionnekCostmusMC
+description: ArmorstandCircleExplode
+
+commands:
+  amsce:
+    description: Place the Armorstand Circle
