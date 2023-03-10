@@ -1,5 +1,5 @@
 # ArmorstandCircleExplode
-Example for Junior Developers of CostmusMC
+Trial Example 
 
 https://user-images.githubusercontent.com/112968622/224183916-d9143f37-0711-4308-b384-70822cc91536.mp4
 
