@@ -1,6 +1,5 @@
 package dev.dionnek.amsce.cmd;
 
-
 import dev.dionnek.amsce.Main;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -15,34 +14,38 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AmsceCommand implements CommandExecutor, Listener {
+public class AmsceCommand implements CommandExecutor {
     private final Main plugin;
+
     public AmsceCommand(Main plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if(!(sender instanceof Player)) {
+        if (!(sender instanceof Player)) {
             sender.sendMessage("You cannot execute this command.");
             return false;
         }
 
-        Player p = (Player) sender;
-        Location center = p.getPlayer().getLocation();
+        Player player = (Player) sender;
+        Location center = player.getLocation();
         createExplodeCircle(center);
         return true;
     }
 
     private void createExplodeCircle(Location center) {
         double radius = 3;
-        double increment = Math.PI / 5;
+        int numArmorStands = 10;
+        double increment = 2 * Math.PI / numArmorStands;
         List<ArmorStand> armorStands = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+
+        for (int i = 0; i < numArmorStands; i++) {
             double angle = i * increment;
             double x = center.getX() + radius * Math.cos(angle);
             double z = center.getZ() + radius * Math.sin(angle);
             Location location = new Location(center.getWorld(), x, center.getY(), z);
+
             ArmorStand armorStand = (ArmorStand) center.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
             armorStand.setGravity(false);
             armorStand.setSmall(true);
@@ -66,7 +69,7 @@ public class AmsceCommand implements CommandExecutor, Listener {
                         cancel();
                     }
                 }
-            }.runTaskTimer(plugin, i * 20, 1);
+            }.runTaskTimer(plugin, i * 20L, 1L);
         }
 
         new BukkitRunnable() {
@@ -83,6 +86,6 @@ public class AmsceCommand implements CommandExecutor, Listener {
                 armorStand.remove();
                 armorStands.remove(armorStand);
             }
-        }.runTaskTimer(plugin, 200, 20L);
+        }.runTaskTimer(plugin, 200L, 20L);
     }
 }
