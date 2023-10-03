@@ -21,6 +21,8 @@ public class AmsceCommand implements CommandExecutor {
         this.plugin = plugin;
     }
 
+
+    
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -34,6 +36,11 @@ public class AmsceCommand implements CommandExecutor {
         return true;
     }
 
+    /**
+     * Creates a circle of explosions using Armor Stands.
+     *
+     * @param center The location at the center of the circle.
+     */
     private void createExplodeCircle(Location center) {
         double radius = 3;
         int numArmorStands = 10;
